@@ -17,7 +17,6 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     ListView listView ;
-    ListAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    // About new class Base adapter
+    // About new class  extends Baseadapter
     private class MyAdapter extends BaseAdapter{
 
 
@@ -88,19 +87,25 @@ public class MainActivity extends AppCompatActivity {
                 holder = (Holder)view.getTag();
             }
 
-            switch (position){
-                case 0:
-                    holder.imageView.setImageResource(R.drawable.test_a);
-                    holder.textView_name.setText("Ann");
-                    break;
-                case 1:
-                    holder.imageView.setImageResource(R.drawable.test_b);
-                    holder.textView_name.setText("GGGGG");
-                    break;
-                case 2:
-                    holder.imageView.setImageResource(R.drawable.test_c);
-                    holder.textView_name.setText("Jimmy");
-                    break;
+            // Basic setting is finished
+            // Below it to put data in listView
+            try{
+                switch (position){
+                    case 0:
+                        holder.imageView.setImageResource(R.drawable.test_a);
+                        holder.textView_name.setText("Ann");
+                        break;
+                    case 1:
+                        holder.imageView.setImageResource(R.drawable.test_b);
+                        holder.textView_name.setText("GGGGG");
+                        break;
+                    case 2:
+                        holder.imageView.setImageResource(R.drawable.test_c);
+                        holder.textView_name.setText("Jimmy");
+                        break;
+                }
+            }catch (Exception e){
+                Toast.makeText(MainActivity.this,"Error Happen",Toast.LENGTH_SHORT).show();
             }
 
             return view;
