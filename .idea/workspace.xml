@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97785d0b-37df-4777-85a5-632e90b91e58" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/listview/app/src/main/res/drawable/test_a.png" beforeDir="false" afterPath="$PROJECT_DIR$/listview/app/src/main/res/drawable/test_a.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/listview/app/src/main/res/drawable/test_b.png" beforeDir="false" afterPath="$PROJECT_DIR$/listview/app/src/main/res/drawable/test_b.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/listview/app/src/main/res/drawable/test_c.png" beforeDir="false" afterPath="$PROJECT_DIR$/listview/app/src/main/res/drawable/test_c.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/listview/app/src/main/Database/information.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,23 +17,32 @@
     </execution>
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/listview/app/src/main/Database/information.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.idea/Customerize_listview.iml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/listview/app/src/main/Database/db_config.php" />
+        <option value="$PROJECT_DIR$/listview/app/src/main/Database/db_connect.php" />
+        <option value="$PROJECT_DIR$/listview/app/src/main/Database/information.php" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="97" />
+    <option name="x" value="61" />
     <option name="y" value="23" />
     <option name="width" value="1244" />
     <option name="height" value="828" />
@@ -92,6 +100,15 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="Database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Customerize_listview" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Customerize_listview" type="462c0819:PsiDirectoryNode" />
+              <item name="listview" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -101,6 +118,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -128,15 +146,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1563977414091</updated>
-      <workItem from="1563977416524" duration="1357000" />
+      <workItem from="1563977416524" duration="8544000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1357000" />
+    <option name="totallyTimeSpent" value="8544000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="97" y="23" width="1244" height="828" extended-state="0" />
+    <frame x="61" y="23" width="1244" height="828" extended-state="0" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24958402" />
@@ -165,6 +183,30 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/listview/app/src/main/java/com/example/listview/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/listview/app/src/main/Database/db_config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+          <folding>
+            <element signature="e#7#50#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/listview/app/src/main/Database/db_connect.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="569">
+          <caret line="44" column="1" lean-forward="true" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/listview/app/src/main/Database/information.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
