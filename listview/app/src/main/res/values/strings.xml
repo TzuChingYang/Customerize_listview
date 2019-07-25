@@ -5,4 +5,5 @@
     <string name="weight">weight</string>
     <string name="bmi">bmi</string>
     <string name="bmr">bmr</string>
+    <string name="debug"></string>
 </resources>
