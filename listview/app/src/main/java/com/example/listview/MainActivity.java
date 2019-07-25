@@ -213,9 +213,6 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 }
-                // 讀取輸入串流並存到字串的部分
-                // 取得資料後想用不同的格式
-                // 例如 Json 等等，都是在這一段做處理
 
 
             } catch(Exception e) {
