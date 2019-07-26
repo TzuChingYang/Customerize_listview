@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -26,9 +27,14 @@ import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
+    // This Count is main to debug
+    static  int count =0;
+
     String result;
     ListView listView ;
     TextView debugger ;
+    TextView textView_debug;
+    Button button_debug;
 
     String[] data_Name= new String[100];
     int[] data_Height= new int[100] ;
@@ -57,14 +63,22 @@ public class MainActivity extends AppCompatActivity {
     private void initialize(){
         listView = findViewById(R.id.listView_main) ;
         debugger = findViewById(R.id.debugger);
+        button_debug = findViewById(R.id.button_debug);
+        textView_debug = findViewById(R.id.textView_debug);
+
     }
 
     // Event Listener setting
     private  void SettingListener(){
         listView.setOnItemClickListener(onItemClick);
+        button_debug.setOnClickListener(Debug_Click);
     }
 
-    // Event Set
+    // Various kinds of Listeners Event
+    /* ======================================== */
+
+    // Below are many Listener Event
+    // Choose one to connect in Setting listeners()
     private AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -72,7 +86,18 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private View.OnClickListener Debug_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            textView_debug.setText(nf.format(count));
+        }
+    };
+
     // About new class  extends Baseadapter
+    /* ======================================== */
+
+    // Below is the Implement of BaseAdapter
+    // The usage of MyAdapter
     private class MyAdapter extends BaseAdapter{
 
 
@@ -106,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
                 holder.textView_weight=view.findViewById(R.id.textView_weight);
                 holder.textView_bmi=view.findViewById(R.id.textView_bmi);
                 holder.textView_bmr=view.findViewById(R.id.textView_bmr);
-
                 view.setTag(holder);
 
             }else{
@@ -187,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
                 int responseCode = connection.getResponseCode();
                 // 建立取得回應的物件
                 if(responseCode == HttpURLConnection.HTTP_OK){
-                    // 如果 HTTP 回傳狀態是 OK ，而不是 Error
+                        // 如果 HTTP 回傳狀態是 OK ，而不是 Error
                     InputStream inputStream = connection.getInputStream();
                     // 取得輸入串流
                     BufferedReader bufReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"), 8);
@@ -200,20 +224,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                     inputStream.close(); // 關閉輸入串流
                     result = box; // 把存放用字串放到全域變數
-
                     jArray = new JSONArray(result);
 
                     for(int i = 0;i<jArray.length();i++){
+
                         JSONObject json_data = jArray.getJSONObject(i);
                         data_Name[i] = json_data.getString("Name");
                         data_Height[i] = json_data.getInt("Height");
                         data_Weight[i] = json_data.getInt("Weight");
                         data_BMI[i] = json_data.getDouble("BMI");
                         data_BMR[i] = json_data.getDouble("BMR");
-
                     }
                 }
-
 
             } catch(Exception e) {
                 result = "error: "+e.toString(); // 如果出事，回傳錯誤訊息
@@ -224,7 +246,6 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     for(int i=0;i<jArray.length();i++){
                         debugger.append(data_Name[i]+" "+nf.format(data_Height[i])+" "+nf.format(data_Weight[i])+" "+nf.format(data_BMI[i])+" "+nf.format(data_BMR[i])+"\n");
-
                     }
                 }
             });

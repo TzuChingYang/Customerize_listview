@@ -6,4 +6,5 @@
     <string name="bmi">bmi</string>
     <string name="bmr">bmr</string>
     <string name="debug"></string>
+    <string name="debug_button">Debug</string>
 </resources>
