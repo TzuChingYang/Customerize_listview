@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }catch (Exception e){
-                Toast.makeText(MainActivity.this,"Error Happen",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"last of view",Toast.LENGTH_SHORT).show();
             }
 
             return view;
@@ -257,6 +257,12 @@ public class MainActivity extends AppCompatActivity {
                     jArray = new JSONArray(result);
 
                     for(int i = 0;i<jArray.length();i++){
+                        //initialize first
+                       data_Name[i]="";
+                       data_Height[i]=0;
+                       data_Weight[i]=0;
+                       data_BMI[i]=0.00;
+                       data_BMR[i]=0.00;
 
                         JSONObject json_data = jArray.getJSONObject(i);
                         data_Name[i] = json_data.getString("username");

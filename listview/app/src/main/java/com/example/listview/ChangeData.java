@@ -40,7 +40,7 @@ public class ChangeData extends AppCompatActivity {
     static int debug_int =0 ;
 
     Button button_update ;
-    Button button_debug ;
+    Button button_delete ;
 
     TextView textView_debug;
     TextView textView_username ;
@@ -77,7 +77,7 @@ public class ChangeData extends AppCompatActivity {
         editText_bmi = findViewById(R.id.editText_bmi);
         editText_bmr = findViewById(R.id.editText_bmr);
 
-        button_debug = findViewById(R.id.debugger_2) ;
+        button_delete = findViewById(R.id.button_delete) ;
         textView_debug = findViewById(R.id.textView_debugger_2) ;
     }
 
@@ -87,9 +87,20 @@ public class ChangeData extends AppCompatActivity {
     // And the Setting function
     private void settingListeners(){
         button_update.setOnClickListener(UpdateAndTurnBack);
+        button_delete.setOnClickListener(Delete);
     }
 
     // Method
+    private View.OnClickListener Delete = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // Only need to know username
+            // SO we can start thread now
+            Thread m_thread = new Thread(DeleteData);
+            m_thread.start();
+        }
+    };
+
     private View.OnClickListener UpdateAndTurnBack = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -209,8 +220,77 @@ public class ChangeData extends AppCompatActivity {
             });
         }
     };
+    // This is the Delete Thread
+    private  Runnable DeleteData = new Runnable() {
+        @Override
+        public void run() {
+            URL url;
+            HttpURLConnection conn = null;
+            String urlString=("username="+username) ;
 
+            try {
+                //Create connection
+                url = new URL("http://10.0.2.2:8888/infoDelete.php");
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type",
+                        "application/x-www-form-urlencoded");
+
+                conn.setRequestProperty("Content-Length", "" +
+                        Integer.toString(urlString.getBytes().length));
+                conn.setRequestProperty("Content-Language", "en-US");
+
+                conn.setUseCaches(false);     // Post cannot use caches
+                conn.setDoInput(true);        // Read from the connection. Default is true.
+
+
+                // Output to the connection. Default is false, set to true because post
+                // method must write something to the connection
+                conn.setDoOutput(true);
+
+                //Send request
+                DataOutputStream wr = new DataOutputStream(
+                        conn.getOutputStream());
+                wr.writeBytes(urlString);
+                wr.flush();
+                wr.close();
+
+                //Get Response
+                InputStream is = conn.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                String line;
+                StringBuilder response = new StringBuilder();
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                    response.append('\n');
+                }
+                textView_debug.setText(response);
+                reader.close();
+
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+                textView_debug.setText("error_1");
+            } finally {
+
+                if (conn != null) {
+                    conn.disconnect();
+                }
+            }
+
+            // 當這個執行緒完全跑完後執行
+            runOnUiThread(new Runnable() {
+                public void run() {
+
+                }
+            });
+        }
+    };
 }
+
+
+
 /*
 * try {
                 URL url = new URL("http://10.0.2.2:8888/infoUpdate.php");

@@ -11,5 +11,6 @@
     <string name="username">UserName</string>
     <string name="update_button">Upddate</string>
     <string name="connect">Connect ?</string>
+    <string name="delete">Delete</string>
 
 </resources>
