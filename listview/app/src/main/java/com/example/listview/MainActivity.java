@@ -1,5 +1,6 @@
 package com.example.listview;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,12 +16,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.client.HttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     TextView debugger ;
     TextView textView_debug;
     Button button_debug;
+    Button button_fresh;
 
     String[] data_Name= new String[100];
     int[] data_Height= new int[100] ;
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(new MyAdapter());
         SettingListener();
 
-        Thread m_threadConnect = new Thread(mutiThread);
+        Thread m_threadConnect = new Thread(connect_StoreData);
         m_threadConnect.start();
     }
 
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView_main) ;
         debugger = findViewById(R.id.debugger);
         button_debug = findViewById(R.id.button_debug);
+        button_fresh=findViewById(R.id.button_fresh);
         textView_debug = findViewById(R.id.textView_debug);
 
     }
@@ -71,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     // Event Listener setting
     private  void SettingListener(){
         listView.setOnItemClickListener(onItemClick);
+        button_fresh.setOnClickListener(Test_connect);
         button_debug.setOnClickListener(Debug_Click);
     }
 
@@ -82,14 +88,36 @@ public class MainActivity extends AppCompatActivity {
     private AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(MainActivity.this,"Name:"+data_Name[position],Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this,"Name:"+data_Name[position],Toast.LENGTH_SHORT).show();
+            Intent intent =new Intent();
+            intent.setClass(MainActivity.this,ChangeData.class);
+
+            // Bundle to send data
+            Bundle bundle = new Bundle();
+            bundle.putString("username",data_Name[position]);
+            bundle.putInt("Height",data_Height[position]);
+            bundle.putInt("Weight",data_Weight[position]);
+            bundle.putDouble("bmi",data_BMI[position]);
+            bundle.putDouble("bmr",data_BMR[position]);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     };
 
     private View.OnClickListener Debug_Click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            textView_debug.setText(nf.format(count));
+
+        }
+    };
+
+    private View.OnClickListener Test_connect =new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Thread m_threadConnect = new Thread(connect_StoreData);
+            m_threadConnect.start();
+
         }
     };
 
@@ -108,12 +136,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Object getItem(int position) {
-            return null;
+            return position;
         }
 
         @Override
         public long getItemId(int position) {
-            return 0;
+            return position;
         }
 
         @Override
@@ -192,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
     // 建立一個執行緒執行的事件取得網路資料
     // Android 有規定，連線網際網路的動作都不能再主線程做執行
     // 畢竟如果使用者連上網路結果等太久整個系統流程就卡死了
-    private Runnable mutiThread = new Runnable(){
+    private Runnable connect_StoreData = new Runnable(){
         public void run()
         {
 
@@ -220,6 +248,8 @@ public class MainActivity extends AppCompatActivity {
                     String line = null; // 宣告讀取用的字串
                     while((line = bufReader.readLine()) != null) {
                         box += line + "\n";
+                        count++;
+
                         // 每當讀取出一列，就加到存放字串後面
                     }
                     inputStream.close(); // 關閉輸入串流
@@ -229,12 +259,14 @@ public class MainActivity extends AppCompatActivity {
                     for(int i = 0;i<jArray.length();i++){
 
                         JSONObject json_data = jArray.getJSONObject(i);
-                        data_Name[i] = json_data.getString("Name");
+                        data_Name[i] = json_data.getString("username");
                         data_Height[i] = json_data.getInt("Height");
                         data_Weight[i] = json_data.getInt("Weight");
                         data_BMI[i] = json_data.getDouble("BMI");
                         data_BMR[i] = json_data.getDouble("BMR");
                     }
+
+                    connection.disconnect();
                 }
 
             } catch(Exception e) {
@@ -244,6 +276,7 @@ public class MainActivity extends AppCompatActivity {
             // 當這個執行緒完全跑完後執行
             runOnUiThread(new Runnable() {
                 public void run() {
+                    debugger.setText("");
                     for(int i=0;i<jArray.length();i++){
                         debugger.append(data_Name[i]+" "+nf.format(data_Height[i])+" "+nf.format(data_Weight[i])+" "+nf.format(data_BMI[i])+" "+nf.format(data_BMR[i])+"\n");
                     }

@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">listview</string>
     <string name="name">name</string>
-    <string name ="height">height</string>
+    <string name="height">height</string>
     <string name="weight">weight</string>
     <string name="bmi">bmi</string>
     <string name="bmr">bmr</string>
     <string name="debug"></string>
     <string name="debug_button">Debug</string>
+    <string name="fresh_button">Fresh</string>
+    <string name="username">UserName</string>
+    <string name="update_button">Upddate</string>
+    <string name="connect">Connect ?</string>
+
 </resources>
